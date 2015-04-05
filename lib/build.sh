@@ -166,6 +166,9 @@ install_npm() {
 function build_dependencies() {
   restore_cache
 
+  info "Installing SSH key"
+  echo "$SSH_KEY" > ~/.ssh_key
+
   if [ "$modules_source" == "" ]; then
     info "Skipping dependencies (no source for node_modules)"
 
