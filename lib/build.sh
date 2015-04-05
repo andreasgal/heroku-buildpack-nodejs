@@ -168,7 +168,6 @@ function build_dependencies() {
 
   info "Installing SSH key"
   echo "$SSH_KEY" > ~/.ssh_key
-  ssh-add ~/.ssh_key
 
   if [ "$modules_source" == "" ]; then
     info "Skipping dependencies (no source for node_modules)"
@@ -177,11 +176,13 @@ function build_dependencies() {
     info "Rebuilding any native modules for this architecture"
     npm rebuild 2>&1 | indent
     info "Installing any new modules"
-    npm install --unsafe-perm --quiet --userconfig $build_dir/.npmrc 2>&1 | indent
+    ssh-agent bash -c 'ssh-add ~/.ssh_key; npm install --unsafe-perm --quiet --userconfig $build_dir/.npmrc 2>&1 | indent'
+    #npm install --unsafe-perm --quiet --userconfig $build_dir/.npmrc 2>&1 | indent
 
   else
     info "Installing node modules"
-    npm install --unsafe-perm --quiet --userconfig $build_dir/.npmrc 2>&1 | indent
+    ssh-agent bash -c 'ssh-add ~/.ssh_key; npm install --unsafe-perm --quiet --userconfig $build_dir/.npmrc 2>&1 | indent'
+    #npm install --unsafe-perm --quiet --userconfig $build_dir/.npmrc 2>&1 | indent
   fi
 }
 
