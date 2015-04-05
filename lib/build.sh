@@ -168,6 +168,7 @@ function build_dependencies() {
 
   info "Installing SSH key"
   echo "$SSH_KEY" > ~/.ssh_key
+  ssh-add ~/.ssh_key
 
   if [ "$modules_source" == "" ]; then
     info "Skipping dependencies (no source for node_modules)"
