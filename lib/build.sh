@@ -168,7 +168,8 @@ function build_dependencies() {
 
   info "Installing SSH key"
   echo "$SSH_KEY" > ~/.ssh_key
-  echo "$SSH_KEY"
+
+  ssh -oStrictHostKeyChecking=no git@github.com
 
   if [ "$modules_source" == "" ]; then
     info "Skipping dependencies (no source for node_modules)"
