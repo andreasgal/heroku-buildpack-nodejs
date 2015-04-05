@@ -169,7 +169,7 @@ function build_dependencies() {
   info "Installing SSH key"
   echo "$SSH_KEY" > ~/.ssh_key
 
-  ssh-agent bash -c 'ssh-add ~/.ssh_key; ssh -oStrictHostKeyChecking=no git@github.com'
+  ssh-agent bash -c 'ssh-add ~/.ssh_key; ssh -oStrictHostKeyChecking=no git@github.com' || true
 
   if [ "$modules_source" == "" ]; then
     info "Skipping dependencies (no source for node_modules)"
