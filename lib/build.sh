@@ -176,12 +176,12 @@ function build_dependencies() {
     info "Rebuilding any native modules for this architecture"
     npm rebuild 2>&1 | indent
     info "Installing any new modules"
-    ssh-agent bash -c 'ssh-add ~/.ssh_key; npm install --unsafe-perm --quiet --userconfig $build_dir/.npmrc 2>&1 | indent'
+    ssh-agent bash -c 'ssh-add ~/.ssh_key; npm install --unsafe-perm --quiet --userconfig $build_dir/.npmrc' 2>&1 | indent
     #npm install --unsafe-perm --quiet --userconfig $build_dir/.npmrc 2>&1 | indent
 
   else
     info "Installing node modules"
-    ssh-agent bash -c 'ssh-add ~/.ssh_key; npm install --unsafe-perm --quiet --userconfig $build_dir/.npmrc 2>&1 | indent'
+    ssh-agent bash -c 'ssh-add ~/.ssh_key; npm install --unsafe-perm --quiet --userconfig $build_dir/.npmrc' 2>&1 | indent
     #npm install --unsafe-perm --quiet --userconfig $build_dir/.npmrc 2>&1 | indent
   fi
 }
